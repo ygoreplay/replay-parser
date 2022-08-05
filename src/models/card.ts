@@ -3,6 +3,21 @@ import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 
 
 import { Text } from "@models/text";
 
+const SET_CODE_ALIASES: Record<number, number> = {
+    // 섬도 => 섬도희
+    [0x115]: 0x1115,
+
+    // 엘드릭실 => 엘드리치
+    [0x2142]: 0x1142,
+
+    // E·, V, E-, M, D => HERO
+    [0x3008]: 0x8,
+    [0x5008]: 0x8,
+    [0x6008]: 0x8,
+    [0xa008]: 0x8,
+    [0xc008]: 0x8,
+};
+
 @Entity({ name: "datas" })
 export class Card extends BaseEntity {
     private static parseSetCode(setCode: number) {
@@ -10,7 +25,7 @@ export class Card extends BaseEntity {
         for (let i = 0; i < 4; ++i) {
             const setcode = (setCode >> (i * 16)) & 0xffff;
             if (setcode) {
-                setcodes.push(setcode);
+                setcodes.push(SET_CODE_ALIASES[setcode] || setcode);
                 setcodes = _.uniq(setcodes);
             }
         }
