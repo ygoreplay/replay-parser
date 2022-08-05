@@ -127,12 +127,12 @@ async function main() {
         item.pendulumCount,
         item.linkCount,
         item.ritualCount,
-        item.setCodeRank[0],
-        item.setCodeCountRank[0],
-        item.setCodeRank[1],
-        item.setCodeCountRank[1],
-        item.setCodeRank[2],
-        item.setCodeCountRank[2],
+        item.setCodeRank[0] || 0,
+        item.setCodeCountRank[0] || 0,
+        item.setCodeRank[1] || 0,
+        item.setCodeCountRank[1] || 0,
+        item.setCodeRank[2] || 0,
+        item.setCodeCountRank[2] || 0,
     ]);
 
     await fs.writeFile("./output.json", JSON.stringify(minimalData));
