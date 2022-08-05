@@ -84,7 +84,6 @@ async function main() {
     }
 
     progressBar.terminate();
-    console.log(deckBuffer);
 
     const resultData = deckBuffer.map((deck): ResultData => {
         const allCards = [...deck.main, ...deck.extra];
