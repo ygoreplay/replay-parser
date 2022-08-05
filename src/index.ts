@@ -40,6 +40,17 @@ async function main() {
         return;
     }
 
+    const textData = await fs.readFile("./data/strings.conf").then(buf => buf.toString());
+    const codeNameMap = Object.fromEntries(
+        textData
+            .split("\n")
+            .filter(line => line.startsWith("!setname "))
+            .map(line => {
+                const [, value, ...rest] = line.split(" ");
+                return [parseInt(value, 16), rest.join(" ")];
+            }),
+    );
+
     await createConnection({
         type: "sqlite",
         database: "./data/cards.cdb",
@@ -85,6 +96,7 @@ async function main() {
 
     progressBar.terminate();
 
+    const codeNames: string[] = [];
     const resultData = deckBuffer.map((deck): ResultData => {
         const allCards = [...deck.main, ...deck.extra];
         const allSetCodes = _.chain(allCards).map("setcodes").flattenDeep().value();
@@ -95,6 +107,8 @@ async function main() {
             .map(p => [parseInt(p[0], 10), p[1]])
             .slice(0, 3)
             .value();
+
+        codeNames.push(codeNameMap[topCodes[0][0]]);
 
         return {
             allCount: deck.main.length + deck.extra.length,
@@ -136,6 +150,8 @@ async function main() {
     ]);
 
     await fs.writeFile("./output.json", JSON.stringify(minimalData));
+    await fs.writeFile("./names.txt", codeNames.join("\n"));
+    await fs.writeFile("./features.txt", minimalData.map(item => item.join(", ")).join("\n"));
 }
 
 clearConsole().then(main).then();
