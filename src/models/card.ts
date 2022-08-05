@@ -7,8 +7,9 @@ const SET_CODE_ALIASES: Record<number, number> = {
     // 섬도 => 섬도희
     [0x115]: 0x1115,
 
-    // 엘드릭실 => 엘드리치
+    // 엘드릭실, 황금향 => 엘드리치
     [0x2142]: 0x1142,
+    [0x143]: 0x1142,
 
     // E·, V, E-, M, D => HERO
     [0x3008]: 0x8,
@@ -16,6 +17,16 @@ const SET_CODE_ALIASES: Record<number, number> = {
     [0x6008]: 0x8,
     [0xa008]: 0x8,
     [0xc008]: 0x8,
+
+    // DDD => DD
+    [0x10af]: 0xaf,
+
+    // 사이버네틱, 사이버 드래곤 => 사이버
+    [0x1093]: 0x93,
+    [0x94]: 0x93,
+
+    // Evil★Twin => Live☆Twin
+    [0x2151]: 0x1151,
 };
 
 @Entity({ name: "datas" })
