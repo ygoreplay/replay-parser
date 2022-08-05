@@ -76,7 +76,7 @@ async function main() {
         const decks = replay
             .getDecks()
             .filter(checkInvalidDeck)
-            .filter(s => s.main.length < 40)
+            .filter(s => s.main.length >= 40)
             .filter(s => s.extra.length === 15); // we don't care incomplete decks
 
         deckBuffer.push(...decks.map(convertDeckToCardDeck));
@@ -84,6 +84,7 @@ async function main() {
     }
 
     progressBar.terminate();
+    console.log(deckBuffer);
 
     const resultData = deckBuffer.map((deck): ResultData => {
         const allCards = [...deck.main, ...deck.extra];
