@@ -9,7 +9,9 @@
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.13",
+        "@types/lodash": "^4.14.182",
         "@types/node": "^18.6.4",
+        "@types/progress": "^2.0.5",
         "@typescript-eslint/eslint-plugin": "^5.32.0",
         "@typescript-eslint/parser": "^5.32.0",
         "eslint": "^8.21.0",
@@ -23,6 +25,11 @@
     "dependencies": {
         "fast-glob": "^3.2.11",
         "fs-extra": "^10.1.0",
+        "lodash": "^4.17.21",
+        "progress": "^2.0.3",
+        "reflect-metadata": "^0.1.13",
+        "sqlite3": "^5.0.11",
+        "typeorm": "^0.2.31",
         "yrp": "^1.3.1"
     }
 }

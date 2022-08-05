@@ -3,3 +3,5 @@
 /yarn-error.log
 /replays/*
 /output.json
+/data/cards.cdb
+/data/strings.conf
